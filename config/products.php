@@ -10,8 +10,8 @@
         [
             'name'  => 'Huawei Mate',
             'original_price' => 20,
-            'discount_price' => 20,
-            'stars' => 1,
+            'discount_price' => 10,
+            'stars' => 2,
             'sale' => false
         ],
         [
