@@ -26,8 +26,8 @@
             </ul>
             <form class="d-flex">
                 <button class="btn btn-outline-dark" type="submit">
-                    <i class="bi bi-person"></i>
-                    Login
+                    <i class="bi bi-person"><a class="dropdown-item" href="login.php">Login</a></i>
+
                 </button>
             </form>
         </div>
