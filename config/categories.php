@@ -2,3 +2,4 @@
     $categories = [
         'Computer','Tablet','Mobile'
     ];
+

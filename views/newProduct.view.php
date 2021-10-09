@@ -33,8 +33,8 @@
                     <?= showError('stars',$errors) ?>
                 </div>
                 <select class="form-control" name="category">
-                    <?php foreach ($categories as $key => $category): ?>
-                        <option value="<?= $key ?>"><?= $category ?></option>
+                    <?php foreach ($categories as $category): ?>
+                        <option value="<?= $category->getId() ?>"><?= $category->getName() ?></option>
                     <?php endforeach ?>
                 </select>
                 <div class="form-group">

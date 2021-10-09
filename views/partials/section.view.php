@@ -6,7 +6,7 @@
             <div class="col mb-5">
                 <div class="card h-100">
                     <!-- Sale badge-->
-                    <?php if ($product['sale']) : ?>
+                    <?php if ($product->sale) : ?>
                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                     <?php endif ?>
                     <!-- Product image-->
@@ -15,18 +15,18 @@
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name-->
-                            <h5 class="fw-bolder"><?= $product['name'] ?></h5>
+                            <h5 class="fw-bolder"><?= $product->name ?></h5>
                             <!-- Product reviews-->
                             <div class="d-flex justify-content-center small text-warning mb-2">
-                                <?php for($i=0;$i<$product['stars'];$i++): ?>
+                                <?php for($i=0;$i<$product->stars;$i++): ?>
                                     <div class="bi-star-fill"></div>
                                 <?php endfor ?>
                             </div>
                             <!-- Product price-->
-                            <?= $product['discount_price']??'' ?>
-                            <?= isset($product['discount_price'])
-                                ?'<span class="text-muted text-decoration-line-through">'.$product['original_price'].'</span>'
-                                :$product['original_price']
+                            <?= $product->discount_price??'' ?>
+                            <?= isset($product->discount_price)
+                                ?'<span class="text-muted text-decoration-line-through">'.$product->original_price.'</span>'
+                                :$product->original_price
                             ?>
                         </div>
                     </div>

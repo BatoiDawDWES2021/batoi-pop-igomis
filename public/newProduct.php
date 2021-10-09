@@ -1,7 +1,6 @@
 <?php
     require_once ('../kernel.php');
-    require_once ($route_config.'menu.php');
-    require_once ($route_config.'categories.php');
+    require_once ('../Services/loadService.php');
     $errors = [];
     if (isPost() && cfsr()){
        $name = isRequired('name',$errors);
