@@ -1,13 +1,21 @@
 <?php
     require_once ('../kernel.php');
+    use BatoiPOP\exceptions\CheckFieldException;
+    use BatoiPOP\exceptions\PasswordIsNotSame;
+
     $errors = [];
     if (isPost() && cfsr()){
-       $user = isRequired('user',$errors);
-       $password = isRequired('password',$errors);
-       $password2 = isRequired('password2',$errors);
-       if ($password != $password2) {
-           $errors['password2'] = 'No és el mateix password';
-       }
+        try {
+            $user = isRequired('user');
+            $password = isRequired('password');
+            $password2 = isRequired('password2');
+            if ($password != $password2) {
+                throw new PasswordIsNotSame($password2);
+            }
+        } catch ( CheckFieldException $e) {
+            $errors[$e->getField()] = $e->getMessage();
+        }
+
        if (!count($errors)){
            header('Location: /');
            die();

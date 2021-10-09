@@ -39,7 +39,8 @@
                 </select>
                 <div class="form-group">
                     <label for="PhotoFile">Puja Foto</label>
-                    <input type="file" name="photo" class="form-control-file" id="PhotoFile">
+                    <input type="file" name="photo" class="form-control-file <?= isValidClass('photo',$errors) ?>" id="PhotoFile">
+                    <?= showError('photo',$errors) ?>
                 </div>
                 <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
                 <button type="submit" class="btn btn-primary">Submit</button>

@@ -1,4 +1,9 @@
 <?php
+use BatoiPOP\exceptions\RequiredField;
+use BatoiPOP\exceptions\IsNotAnImageFile;
+use BatoiPOP\exceptions\NotNumericField;
+use BatoiPOP\exceptions\NoFitField;
+use BatoiPOP\exceptions\FailedLoadingFile;
 
 function dd(...$variable){
      foreach ($variable as $var){
@@ -40,45 +45,44 @@ function showError($nomCamp,$errors){
     return "<div class='valid-feedback'>All correct</div>";
 }
 
-function saveFile($nomcamp,$type,$directori,&$errors){
+function saveFile($nomcamp,$type,$directori){
     if ($_FILES[$nomcamp]['type'] == $type){
         $nomFitxer = $_FILES[$nomcamp]["name"];
-        if (move_uploaded_file($_FILES[$nomcamp]["tmp_name"], "$directori/" . $nomFitxer)) {
-            return $nomFitxer;
-        } else {
-            $errors[$nomcamp] = "No es pot pujar el fitxer";
+        try {
+            move_uploaded_file($_FILES[$nomcamp]["tmp_name"], "$directori/" . $nomFitxer);
+        } catch (Exception $e){
+            throw new FailedLoadingFile($nomcamp,$e->getMessage());
         }
-    } else {
-        $errors[$nomcamp] = "Fitxer No és $type";
+        return $nomFitxer;
     }
+    throw new IsNotAnImageFile($nomcamp);
 }
 
 function cfsr(){
     if (parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST) != $_SERVER['HTTP_HOST']) die('Anti-CSRF');
-    else return true;
+    return true;
 }
 
-function isRequired($nomCamp,&$errors){
+function isRequired($nomCamp){
     if (!empty($_POST[$nomCamp])) {
         return trim(htmlspecialchars($_POST[$nomCamp]));
     }
-    else {
-        $errors[$nomCamp] = "El $nomCamp és requerit";
-        return null;
-    }
+    throw new RequiredField($nomCamp);
 }
 
-function isBetween($nomCamp,&$errors,$min=-99999999,$max=9999999){
+function isBetween($nomCamp,$min=-99999999,$max=9999999){
     if (!empty($_POST[$nomCamp]) && is_numeric($_POST[$nomCamp])) {
         if ($_POST[$nomCamp]<$min || $_POST[$nomCamp]> $max){
-            $errors[$nomCamp] = "$nomCamp ha d'estar entre $min i $max";
-            return null;
+            throw new NoFitField($nomCamp);
         }
         else {
             return $_POST[$nomCamp];
         }
-    } else {
-        $errors[$nomCamp] = "$nomCamp és requerit i numèric";
-        return null;
     }
+    throw new NotNumericField($nomCamp);
+}
+
+function isSame($a,$b){
+    if ($a === $b) return true;
+    throw new \BatoiPOP\exceptions\PasswordIsNotSame();
 }
