@@ -2,6 +2,8 @@
     require_once ('../kernel.php');
     require_once ('../Services/loadService.php');
     use BatoiPOP\exceptions\CheckFieldException;
+    use BatoiPOP\Product;
+
 
     $errors = [];
     if (isPost() && cfsr()){
@@ -17,7 +19,8 @@
         }
 
        if (!count($errors)){
-           loadView('validateProduct',compact('menu','name','dprice','price','stars','category','photo','categories'));
+           $validProduct = new Product(12,$name,compact('dprice','price','stars','category','photo'));
+           loadView('validateProduct',compact('menu','validProduct','categories'));
            die();
        }
     }

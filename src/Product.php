@@ -50,9 +50,11 @@ class Product
         return isset($this->features[$key]);
     }
 
+
     public static function import(Array $products):Array
     {
         $productsObjects = [];
+
         foreach ($products as $key => $product){
             $tmp = new Product($key);
             foreach ($product as $feature => $value){
