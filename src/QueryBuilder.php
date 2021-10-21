@@ -24,6 +24,12 @@ class QueryBuilder
         return $stpdo->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function selectAllOrder($table,$limit,$order){
+        $stpdo = $this->conn->prepare("SELECT * FROM {$table}  ORDER BY {$order} LIMIT $limit");
+        $stpdo->execute();
+        return $stpdo->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function findById($table,$id){
         $stpdo = $this->conn->prepare("SELECT * FROM {$table} WHERE `id` = :id ");
         $stpdo->bindParam(":id",$id);
