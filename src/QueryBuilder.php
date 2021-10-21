@@ -17,11 +17,11 @@ class QueryBuilder
         $this->conn = $conn;
     }
 
-    public function selectAll($table){
-        $stpdo = $this->conn->prepare("SELECT * FROM {$table}");
+    public function selectAll($table,$limit){
+        $stpdo = $this->conn->prepare("SELECT * FROM {$table} LIMIT $limit");
 
         $stpdo->execute();
-        return $stpdo->fetchAll(\PDO::FETCH_OBJ);
+        return $stpdo->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function findById($table,$id){
