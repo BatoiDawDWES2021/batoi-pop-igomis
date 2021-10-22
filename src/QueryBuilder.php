@@ -20,34 +20,33 @@ class QueryBuilder
     public function selectAll($table,$limit){
         $stpdo = $this->conn->prepare("SELECT * FROM {$table} LIMIT $limit");
 
-        $stpdo->execute();
+        $this->execute($stpdo);
         return $stpdo->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function selectAllOrder($table,$limit,$order){
-        $stpdo = $this->conn->prepare("SELECT * FROM {$table}  ORDER BY {$order} LIMIT $limit");
-        $stpdo->execute();
+        $stpdo = $this->conn->prepare("SELECT * FROM {$table}  ORDER BY {$order} DESC LIMIT $limit");
+        $this->execute($stpdo);
         return $stpdo->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function findById($table,$id){
         $stpdo = $this->conn->prepare("SELECT * FROM {$table} WHERE `id` = :id ");
         $stpdo->bindParam(":id",$id);
-        $stpdo->execute();
+        $this->execute($stpdo);
 
-        return $stpdo->fetch(\PDO::FETCH_ASSOC);
+        return $stpdo->fetch(\PDO::FETCH_OBJ);
     }
 
     public function deleteById($table,$primaryKey,$id){
         $stpdo = $this->conn->prepare("DELETE FROM {$table} WHERE `$primaryKey` = :id ");
         $stpdo->bindParam(":id",$id);
-        return $stpdo->execute();
-
+        $this->execute($stpdo);
     }
     public function selectWhere($table,$key,$value){
         $stpdo = $this->conn->prepare("SELECT * FROM {$table} WHERE `$key` = :value ");
         $stpdo->bindParam(":value",$value);
-        $stpdo->execute();
+        $this->execute($stpdo);
 
         return $stpdo->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -57,7 +56,8 @@ class QueryBuilder
         foreach ($parametres as $key => $value){
             $stpdo->bindValue(":$key",$value);
         }
-        $stpdo->execute();
+        $this->execute($stpdo);
+
     }
 
     public function update($table,$parametres,$primaryKey,$id){
@@ -66,8 +66,16 @@ class QueryBuilder
             $stpdo->bindValue(":$key",$value);
         }
         $stpdo->bindParam(":id",$id);
+        $this->execute($stpdo);
+    }
 
-        $stpdo->execute();
+    public function execute(&$stpdo){
+        try {
+            $stpdo->execute();
+        } catch (\PDOException $exception){
+            echo ('Error amb la base de dades: '.$exception->getMessage());
+            die();
+        }
     }
 
 /*

@@ -47,9 +47,9 @@ function showError($nomCamp,$errors){
 
 function saveFile($nomcamp,$type,$directori){
     if ($_FILES[$nomcamp]['type'] == $type){
-        $nomFitxer = $_FILES[$nomcamp]["name"];
+        $nomFitxer = "/$directori/".$_FILES[$nomcamp]["name"];
         try {
-            move_uploaded_file($_FILES[$nomcamp]["tmp_name"], "$directori/" . $nomFitxer);
+            move_uploaded_file($_FILES[$nomcamp]["tmp_name"], $_SERVER['DOCUMENT_ROOT'].$nomFitxer);
         } catch (Exception $e){
             throw new FailedLoadingFile($nomcamp,$e->getMessage());
         }

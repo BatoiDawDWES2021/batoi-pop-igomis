@@ -6,5 +6,5 @@
            'Populars' => '/?show=populars',
            'News' => '/?show=news'
         ]],
-        ['Load' => '/newProduct.php']
+        ['Load' => '/products/index.php']
     ];

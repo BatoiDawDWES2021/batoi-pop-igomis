@@ -1,7 +1,7 @@
 <?php
-    require_once('partials/head.view.php');
-    require_once('partials/navigation.view.php');
-    require_once('partials/header.view.php');
+require_once(dirname(__FILE__) .'/../partials/head.view.php');
+require_once(dirname(__FILE__) .'/../partials/navigation.view.php');
+require_once(dirname(__FILE__) .'/../partials/header.view.php');
 ?>
 <!-- Section-->
 <section class="py-5">
@@ -10,9 +10,15 @@
             <div class="col mb-5">
                 <div class="card h-100">
                     <!-- Sale badge-->
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem"><?= $categories[$validProduct->category]->getName() ?></div>
+                    <?php if ($validProduct->sale): ?>
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem"><?= $validProduct->sale ?></div>
+                    <?php endif; ?>
                     <!-- Product image-->
-                    <img class="card-img-top" src="/images/<?= $validProduct->photo ?>" alt="..." />
+                    <?php if ($validProduct->sale): ?>
+                        <img class="card-img-top" src="/<?= $validProduct->img ?>" alt="..." />
+                    <?php else: ?>
+                        <img class="card-img-top" src="http://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    <?php endif; ?>
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
@@ -25,10 +31,10 @@
                                 <?php endfor ?>
                             </div>
                             <!-- Product price-->
-                            <?= $validProduct->dprice??'' ?>
-                            <?= isset($validProduct->price)
-                                ?'<span class="text-muted text-decoration-line-through">'.$validProduct->price.'</span>'
-                                :$validProduct->price
+                            <?= $validProduct->discount_price??'' ?>
+                            <?= isset($validProduct->original_price)
+                                ?'<span class="text-muted text-decoration-line-through">'.$validProduct->original_price.'</span>'
+                                :$validProduct->original_price
                             ?>
                         </div>
                     </div>
@@ -38,6 +44,4 @@
         </div>
     </div>
 </section>
-<?php
-    require_once('partials/footer.view.php');
-?>
+<?php require_once(dirname(__FILE__) .'/../partials/footer.view.php'); ?>
