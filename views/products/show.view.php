@@ -14,8 +14,8 @@ require_once(dirname(__FILE__) .'/../partials/header.view.php');
                         <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem"><?= $validProduct->sale ?></div>
                     <?php endif; ?>
                     <!-- Product image-->
-                    <?php if ($validProduct->sale): ?>
-                        <img class="card-img-top" src="/<?= $validProduct->img ?>" alt="..." />
+                    <?php if ($validProduct->img): ?>
+                        <img class="card-img-top" height="300px" src="<?= $validProduct->img ?>" alt="..." />
                     <?php else: ?>
                         <img class="card-img-top" src="http://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                     <?php endif; ?>
