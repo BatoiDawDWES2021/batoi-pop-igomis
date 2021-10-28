@@ -3,6 +3,7 @@
 
     require_once('../../Services/loadService.php');
     use BatoiPOP\exceptions\CheckFieldException;
+    use BatoiPOP\Product;
 
     $errors = [];
     if (isPost() && cfsr()){
@@ -23,5 +24,5 @@
            header('location:/products/index.php');
        }
     }
-
-    loadView('products/new',compact('menu','categories','errors'));
+    $product = new Product();
+    loadView('products/form',compact('menu','categories','errors','product'));

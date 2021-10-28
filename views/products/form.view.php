@@ -7,11 +7,13 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <form method="POST" action="update.php" enctype="multipart/form-data">
+            <form method="POST" action="<?= isset($product->id)?'update.php':'new.php' ?>" enctype="multipart/form-data">
+                <?php if (isset($product->id)): ?>
                 <div class="form-group">
                     <label for="name">Id:<?= $product->id ?></label>
                     <input name="id" type="hidden" value="<?= $product->id ?>">
                 </div>
+                <?php endif; ?>
                 <div class="form-group">
                     <label for="name">Nom:</label>
                     <input name="name" type="text" class="form-control <?= isValidClass('name',$errors) ?>" id="title" aria-describedby="titleHelp" placeholder="Enter Name" value="<?= $old_name??$product->name ?>">

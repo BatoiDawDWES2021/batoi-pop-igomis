@@ -15,7 +15,7 @@ class Product
      * @param $id
      * @param $name
      */
-    public function __construct(int $id,String $name = null,Array $features = [])
+    public function __construct(int $id = null,String $name = null,Array $features = [])
     {
         $this->id = $id;
         $this->name = $name;

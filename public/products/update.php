@@ -26,6 +26,6 @@ if (isPost() && cfsr()){
 }
 $id = $_REQUEST['id'];
 $product = $query->findById('productes',$id);
-loadView('products/update',compact('menu','categories','errors','product'));
+loadView('products/form',compact('menu','categories','errors','product'));
 
 
