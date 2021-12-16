@@ -8,4 +8,4 @@
 
     require_once('../Services/loadService.php');
 
-    loadView('index',compact('menu','products','categories'));
+    loadView('index',compact('menu','products','categories','user'));
