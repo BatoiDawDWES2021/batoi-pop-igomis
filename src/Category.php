@@ -39,8 +39,8 @@ class Category
     public static function import(Array $categories):Array
     {
         $categoriesObject = [];
-        foreach ($categories as $key => $name){
-            $categoriesObject[$key] = new Category($key,$name);
+        foreach ($categories as $key => $categoria){
+            $categoriesObject[$key] = new Category($categoria['id'],$categoria['name']);
         }
         return $categoriesObject;
     }

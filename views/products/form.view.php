@@ -9,7 +9,7 @@
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <form method="POST" action="<?= isset($product->id)?'update.php':'new.php' ?>" enctype="multipart/form-data">
                 <?php if (isset($product->id)): ?>
-                <div class="form-group">
+                   <div class="form-group">
                     <label for="name">Id:<?= $product->id ?></label>
                     <input name="id" type="hidden" value="<?= $product->id ?>">
                 </div>
@@ -40,7 +40,7 @@
                 </div>
                 <select class="form-control" name="category">
                     <?php foreach ($categories as $category): ?>
-                        <option value="<?= $category->getId() ?>"><?= $category->getName() ?></option>
+                        <option value="<?= $category->getId() ?>"  <?= ($product->category == $category->getId())?'selected':'' ?>><?= $category->getName() ?></option>
                     <?php endforeach ?>
                 </select>
                 <div class="form-group">

@@ -1,25 +1,29 @@
 <?php
-    require_once ('../kernel.php');
-    use BatoiPOP\exceptions\CheckFieldException;
-    use BatoiPOP\exceptions\PasswordIsNotSame;
 
-    $errors = [];
-    if (isPost() && cfsr()){
-        try {
-            $user = isRequired('user');
-            $password = isRequired('password');
-            $password2 = isRequired('password2');
-            if ($password != $password2) {
-                throw new PasswordIsNotSame($password2);
-            }
-        } catch ( CheckFieldException $e) {
-            $errors[$e->getField()] = $e->getMessage();
+require_once ('../kernel.php');
+$query = require_once ('../bootstrap.php');
+use BatoiPOP\exceptions\CheckFieldException;
+use BatoiPOP\exceptions\PasswordIsNotSame;
+
+$errors = [];
+if (isPost() && cfsr()){
+    try {
+        $name = isRequired('user');
+        $email = isRequired('email');
+        $password = isRequired('password');
+        $password2 = isRequired('password2');
+        if ($password != $password2) {
+            throw new PasswordIsNotSame($password2);
         }
-
-       if (!count($errors)){
-           header('Location: /');
-           die();
-       }
+    } catch ( CheckFieldException $e) {
+        $errors[$e->getField()] = $e->getMessage();
     }
 
-    loadView('register',compact('errors'));
+    if (!count($errors)){
+        $password = password_hash($password,PASSWORD_DEFAULT );
+        $query->insert('users',compact('name','email','password'));
+        header('Location: /');
+    }
+}
+
+loadView('register',compact('errors'));

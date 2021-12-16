@@ -8,12 +8,16 @@
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <form method="POST" action="login.php" >
                 <div class="form-group">
-                    <label for="user">Login:</label>
-                    <input name="user" type="text" class="form-control <?= isValidClass('user',$errors) ?>" id="user"  placeholder="Enter user" value="<?= $old_user??'' ?>">
-                    <?= showError('user',$errors) ?>
+                    <label for="email">Login:</label>
+                    <input name="email" type="text" class="form-control <?= isValidClass('email',$errors) ?>" id="email"  placeholder="Enter email" value="<?= $old_email??'' ?>">
+                    <?= showError('email',$errors) ?>
                 </div>
                 <div class="form-group">
                     <input name="password" type="password" class="form-control" id="password"  placeholder="Enter password">
+                </div>
+                <div class="form-group">
+                    <label for="forgot">He oblidat la contrasenya:</label>
+                    <input name="forgot" type="checkbox"  id="forgot">
                 </div>
                 <a href="register.php" class="btn btn-dark">Register</a>
                 <button type="submit" class="btn btn-primary">Submit</button>

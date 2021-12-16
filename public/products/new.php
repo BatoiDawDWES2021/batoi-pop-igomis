@@ -14,13 +14,14 @@
             $stars = isBetween('stars',1,5);
             $sale = 0;
             $img = saveFile('photo','image/png','images');
+            $category = $_POST['category'];
         } catch (CheckFieldException $e){
             $errors[$e->getField()] = $e->getMessage();
         }
 
        if (!count($errors)){
            $query = require_once('../../bootstrap.php');
-           $query->insert('productes',compact('name','original_price','discount_price','sale','stars','img'));
+           $query->insert('productes',compact('name','original_price','discount_price','sale','stars','img','category'));
            header('location:/products/index.php');
        }
     }

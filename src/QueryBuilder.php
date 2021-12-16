@@ -78,6 +78,23 @@ class QueryBuilder
         }
     }
 
+    public function login($table,$email,$password){
+        $stpdo = $this->conn->prepare("SELECT * FROM $table WHERE email = :email");
+        $stpdo->bindValue(":email",$email);
+        $stpdo->execute();
+        $user = $stpdo->fetch(\PDO::FETCH_OBJ);
+        if (password_verify($password, $user->password)) return $user;
+        return null;
+    }
+
+    public function selectWhereUnique($table,$key,$value){
+        $stpdo = $this->conn->prepare("SELECT * FROM {$table} WHERE `$key` = :value ");
+        $stpdo->bindParam(":value",$value);
+        $this->execute($stpdo);
+
+        return $stpdo->fetch(\PDO::FETCH_OBJ);
+    }
+
 /*
 
 

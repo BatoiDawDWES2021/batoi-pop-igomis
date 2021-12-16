@@ -4,6 +4,9 @@
         <?php if ($validProduct->sale): ?>
             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
         <?php endif; ?>
+        <?php if ($validProduct->category): ?>
+            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem"><a href="/?show=categories&category=<?= $validProduct->category ?>"><?= $categories[$validProduct->category-1]->getName() ?></a></div>
+        <?php endif; ?>
         <!-- Product image-->
         <?php if ($validProduct->img): ?>
             <img class="card-img-top" height="300px" src="<?= $validProduct->img ?>" alt="..." />

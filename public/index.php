@@ -1,10 +1,10 @@
 <?php
     CONST SHOW_DEFAULT = 8;
     require_once ('../kernel.php');
-    use BatoiPOP\Paginator;
     $query = require_once ('../bootstrap.php');
     
     $show = $_GET['show']??SHOW_DEFAULT;
+    $category = $_GET['category'] ?? 0;
 
     require_once('../Services/loadService.php');
 
