@@ -26,8 +26,11 @@
             </ul>
             <form class="d-flex">
                 <button class="btn btn-outline-dark" type="submit">
-                    <i class="bi bi-person"></i>
-                    Login
+                    <?php if (isset($user)): ?>
+                        <i class="bi bi-person"><a class="dropdown-item" href="logout.php">Logout <?= $user->name ?> </a></i>
+                    <?php else: ?>
+                        <i class="bi bi-person"><a class="dropdown-item" href="login.php">Login</a></i>
+                    <?php endif; ?>
                 </button>
             </form>
         </div>

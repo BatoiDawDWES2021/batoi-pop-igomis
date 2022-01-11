@@ -2,9 +2,9 @@
     $menu = [
         ['Home' => '/'],
         ['Show' => [
-           'All Products' => '/',
-           'Populars' => '/',
-           'News' => '/'
+           'All Products' => '/?show=all',
+           'Populars' => '/?show=populars',
+           'News' => '/?show=news'
         ]],
-        ['Load' => '/newProduct.php']
+        ['Load' => '/products/index.php']
     ];
